@@ -1,0 +1,6 @@
+export const COLORS = {
+  PRIMARY_1: "#202040",
+  PRIMARY_2: "#202060",
+  SECONDARY_1: "#602080",
+  SECONDARY_2: "#b030b0"
+};
