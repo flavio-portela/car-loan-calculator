@@ -41,7 +41,7 @@ function App() {
       monthlyPayment,
       annualRate: interestRate,
       totalMonths: loanDurationMonths,
-      principal: carPrice
+      principal: principal
     });
     setMonthlyPayment(monthlyPayment);
     setTotalInterest(totalInterests);
