@@ -4,7 +4,8 @@ import { Global } from "@emotion/core";
 import styles, { globalStyles } from "./App.styles";
 import CalculatorForm from "./components/CalculatorForm";
 import PaymentsSummary from "./components/PaymentsSummary";
-import { calculateLoan } from "./utils/loanCalculator";
+import AmortizationTable from "./components/AmortizationTable";
+import { calculateLoan, calculateAmortization } from "./utils/loanCalculator";
 
 const loanInitialValues = {
   carPrice: 10000,
@@ -16,6 +17,7 @@ const loanInitialValues = {
 function App() {
   const [monthlyPayment, setMonthlyPayment] = useState(0);
   const [totalInterests, setTotalInterest] = useState(0);
+  const [amortizationSchedule, setAmortizationSchedule] = useState([]);
 
   // Calculate loan with the initial values when the component mounts
   useEffect(() => {
@@ -28,20 +30,22 @@ function App() {
   };
 
   const updateLoanValues = values => {
-    const {
-      carPrice,
-      downPayment,
-      loanDurationMonths,
-      interestRate
-    } = values;
+    const { carPrice, downPayment, loanDurationMonths, interestRate } = values;
     const principal = carPrice - downPayment;
     const { monthlyPayment, totalInterests } = calculateLoan({
       principal,
       duration: loanDurationMonths,
       interestRate
     });
+    const amortizationSchedule = calculateAmortization({
+      monthlyPayment,
+      annualRate: interestRate,
+      totalMonths: loanDurationMonths,
+      principal: carPrice
+    });
     setMonthlyPayment(monthlyPayment);
     setTotalInterest(totalInterests);
+    setAmortizationSchedule(amortizationSchedule);
   };
 
   return (
@@ -61,6 +65,7 @@ function App() {
             totalInterests={totalInterests}
           />
         </section>
+        <AmortizationTable amortizationSchedule={amortizationSchedule} />
       </div>
     </div>
   );

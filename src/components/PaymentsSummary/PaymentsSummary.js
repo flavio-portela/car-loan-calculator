@@ -1,17 +1,18 @@
-import React from 'react';
-import styles from './PaymentSummary.styles';
+import React from "react";
+import styles from "./PaymentSummary.styles";
+import { formatPrice } from "../../utils/prices";
 
 const PaymentsSummary = ({ monthlyPayment, totalInterests }) => {
   return (
     <div css={styles}>
       <div className="monthlyPayment">
         <span>Monthly Payment</span>
-        <h2>${monthlyPayment.toFixed(2)}</h2>
+        <h2>{formatPrice(monthlyPayment)}</h2>
       </div>
       <hr />
       <div className="totalInterests">
         <span>Total Interest:</span>
-        <h3>${totalInterests.toFixed(2)}</h3>
+        <h3>{formatPrice(totalInterests)}</h3>
       </div>
     </div>
   );

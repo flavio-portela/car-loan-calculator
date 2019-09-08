@@ -44,14 +44,18 @@ const CalculatorForm = ({ onSubmit, initialValues = {} }) => {
     // Calculate the duration in years
     if (name === "loanDurationMonths") {
       const loanDurationYears = value / 12;
-      newValues["loanDurationYears"] = loanDurationYears;
+      newValues["loanDurationYears"] = isNaN(loanDurationYears)
+        ? !value
+        : loanDurationYears;
     }
 
-    // Calculate the duration in years
+    // Calculate the duration in months
     if (name === "loanDurationYears") {
       const loanDurationMonths = value * 12;
-      newValues["loanDurationMonths"] = loanDurationMonths;
+      newValues["loanDurationMonths"] =
+        isNaN(loanDurationMonths) || !value ? 1 : loanDurationMonths;
     }
+
     validateField(name, newValues);
     setFormValues(newValues);
   };
