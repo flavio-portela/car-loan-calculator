@@ -19,10 +19,29 @@ yup.addMethod(yup.number, "format", function() {
 });
 
 const validationSchema = yup.object().shape({
-  carPrice: yup.number().label('Car Price').format(),
-  downPayment: yup.number().label('Down Payment').format(),
-  loanDuration: yup.number().label('Loan Duration').format(),
-  interestRate: yup.number().label('Interest Rate').format().min(0).max(100)
+  carPrice: yup
+    .number()
+    .label("Car Price")
+    .format(),
+  downPayment: yup
+    .number()
+    .label("Down Payment")
+    .format(),
+  loanDurationMonths: yup
+    .number()
+    .min(1)
+    .label("Loan Duration")
+    .format(),
+  loanDurationYears: yup
+    .number()
+    .label("Loan Duration")
+    .format(),
+  interestRate: yup
+    .number()
+    .label("Interest Rate")
+    .format()
+    .min(0)
+    .max(100)
 });
 
 export default validationSchema;

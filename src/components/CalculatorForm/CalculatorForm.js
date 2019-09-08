@@ -3,14 +3,17 @@ import styles from "./CalculatorForm.styles";
 import validationSchema from "./validationSchema";
 import classNames from "classnames";
 
-const CalculatorForm = ({ onSubmit }) => {
+const CalculatorForm = ({ onSubmit, initialValues = {} }) => {
   const [formErrors, setFormErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const { loanDurationMonths: initialDuration } = initialValues;
   const [formValues, setFormValues] = useState({
-    carPrice: 10000,
+    carPrice: 0,
     downPayment: 0,
-    loanDuration: 12, // In Months
-    interestRate: 4.5 // Per Year
+    loanDurationMonths: 0,
+    loanDurationYears: initialDuration ? initialDuration / 12 : 0,
+    interestRate: 0, // Per Year
+    ...initialValues
   });
 
   useEffect(() => {
@@ -37,6 +40,18 @@ const CalculatorForm = ({ onSubmit }) => {
   const handleInputChange = e => {
     const { name, value } = e.target;
     const newValues = { ...formValues, [name]: value };
+
+    // Calculate the duration in years
+    if (name === "loanDurationMonths") {
+      const loanDurationYears = value / 12;
+      newValues["loanDurationYears"] = loanDurationYears;
+    }
+
+    // Calculate the duration in years
+    if (name === "loanDurationYears") {
+      const loanDurationMonths = value * 12;
+      newValues["loanDurationMonths"] = loanDurationMonths;
+    }
     validateField(name, newValues);
     setFormValues(newValues);
   };
@@ -48,11 +63,17 @@ const CalculatorForm = ({ onSubmit }) => {
     }
   };
 
-  const { carPrice, downPayment, loanDuration, interestRate } = formValues;
+  const {
+    carPrice,
+    downPayment,
+    loanDurationMonths,
+    loanDurationYears,
+    interestRate
+  } = formValues;
   return (
     <form onSubmit={handleSubmit} css={styles}>
       <div>
-        <label htmlFor="carPrice">Card Price:</label>
+        <label htmlFor="carPrice">Car Price:</label>
         <div className="formField">
           <input
             type="text"
@@ -80,17 +101,31 @@ const CalculatorForm = ({ onSubmit }) => {
         </div>
       </div>
       <div>
-        <label htmlFor="loanDuration">Loan Duration:</label>
+        <label htmlFor="loanDuration">Loan Duration (Months):</label>
         <div className="formField">
           <input
             type="text"
-            className={classNames({ error: formErrors.loanDuration })}
-            value={loanDuration}
+            className={classNames({ error: formErrors.loanDurationMonths })}
+            value={loanDurationMonths}
             onChange={handleInputChange}
-            id="loanDuration"
-            name="loanDuration"
+            id="loanDurationMonths"
+            name="loanDurationMonths"
           />
-          <span>{formErrors.loanDuration}</span>
+          <span>{formErrors.loanDurationMonths}</span>
+        </div>
+      </div>
+      <div>
+        <label htmlFor="loanDuration">Loan Duration (Years):</label>
+        <div className="formField">
+          <input
+            type="text"
+            className={classNames({ error: formErrors.loanDurationYears })}
+            value={loanDurationYears}
+            onChange={handleInputChange}
+            id="loanDurationYears"
+            name="loanDurationYears"
+          />
+          <span>{formErrors.loanDurationYears}</span>
         </div>
       </div>
       <div>

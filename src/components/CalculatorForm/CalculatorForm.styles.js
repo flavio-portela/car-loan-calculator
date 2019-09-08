@@ -7,6 +7,9 @@ export default css`
     display: flex;
     justify-content: space-between;
     margin: 3rem 0;
+    label{
+      width: 50%;
+    }
     .formField {
       position: relative;
       flex-wrap: wrap;
@@ -23,7 +26,7 @@ export default css`
     }
     @media only screen and (max-width: 450px) {
       flex-direction: column;
-      .formField{ 
+      .formField, label{ 
         width: 100%;
       }
     }
