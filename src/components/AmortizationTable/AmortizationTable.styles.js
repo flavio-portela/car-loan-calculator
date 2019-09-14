@@ -1,11 +1,12 @@
 import { css } from "@emotion/core";
-import { COLORS } from '../../constants';
+import { COLORS } from "../../constants";
 
 export default css`
-  display: block;
-  overflow-x: scroll;
-  width: 100%;
+  overflow: auto;
   padding: 1rem;
+  table{
+    width: 100%;
+  }
   th {
     color: ${COLORS.PRIMARY_2};
   }
