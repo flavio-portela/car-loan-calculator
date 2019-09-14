@@ -12,7 +12,8 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "Loan Calculator",
-      template: "src/index.html"
+      template: "src/index.html",
+      favicon: "src/favicon.ico"
     })
   ],
   module: {

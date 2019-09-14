@@ -2,6 +2,8 @@ import { css } from "@emotion/core";
 import { COLORS } from '../../constants';
 
 export default css`
+  display: block;
+  overflow-x: scroll;
   width: 100%;
   padding: 1rem;
   th {
