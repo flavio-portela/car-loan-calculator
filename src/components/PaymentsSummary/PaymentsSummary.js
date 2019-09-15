@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./PaymentSummary.styles";
 import { formatPrice } from "../../utils/prices";
 
-const PaymentsSummary = ({ monthlyPayment, totalInterests }) => {
+const PaymentsSummary = ({ monthlyPayment, totalInterests, className }) => {
   return (
-    <div css={styles}>
+    <div css={styles} className={className}>
       <div className="monthlyPayment">
         <span>Monthly Payment</span>
         <h2>{formatPrice(monthlyPayment)}</h2>

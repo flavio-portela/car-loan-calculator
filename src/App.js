@@ -57,10 +57,12 @@ function App() {
       <div>
         <section className="calculatorWrapper">
           <CalculatorForm
+            className='loanForm'
             initialValues={loanInitialValues}
             onSubmit={handleSubmit}
           />
           <PaymentsSummary
+            className='paymentSummary'
             monthlyPayment={monthlyPayment}
             totalInterests={totalInterests}
           />

@@ -38,7 +38,7 @@ const validationSchema = yup.object().shape({
     .format(),
   interestRate: yup
     .number()
-    .label("Interest Rate")
+    .label("Yearly Interest Rate")
     .format()
     .min(0)
     .max(100)

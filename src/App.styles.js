@@ -1,21 +1,25 @@
 import { css } from "@emotion/core";
-import { COLORS } from "./constants";
 
 export default css`
   font-size: 2rem;
+  padding: 0 20rem;
   .calculatorWrapper {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    & > * {
-      width: 40%;
+    justify-content: space-between;
+    .loanForm {
+      width: 50%;
     }
-    @media only screen and (max-width: 900px) {
-      & > * {
+    @media (max-width: 689px) {
+      flex-direction: column;
+      .loanForm{
         width: 100%;
       }
     }
   }
+  @media (max-width: 1041px) {
+    padding: 0;
+  }
+
   header h1 {
     text-transform: uppercase;
     text-align: center;

@@ -3,7 +3,7 @@ import styles from "./CalculatorForm.styles";
 import validationSchema from "./validationSchema";
 import classNames from "classnames";
 
-const CalculatorForm = ({ onSubmit, initialValues = {} }) => {
+const CalculatorForm = ({ onSubmit, initialValues = {}, className }) => {
   const [formErrors, setFormErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
   const { loanDurationMonths: initialDuration } = initialValues;
@@ -75,7 +75,7 @@ const CalculatorForm = ({ onSubmit, initialValues = {} }) => {
     interestRate
   } = formValues;
   return (
-    <form onSubmit={handleSubmit} css={styles}>
+    <form onSubmit={handleSubmit} css={styles} className={className}>
       <div>
         <label htmlFor="carPrice">Car Price:</label>
         <div className="formField">
@@ -133,7 +133,7 @@ const CalculatorForm = ({ onSubmit, initialValues = {} }) => {
         </div>
       </div>
       <div>
-        <label htmlFor="interestRate">Interest Rate:</label>
+        <label htmlFor="interestRate">Yearly Interest Rate:</label>
         <div className="formField">
           <input
             type="text"
